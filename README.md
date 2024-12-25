@@ -19,7 +19,7 @@ RUN_MODE=1
 
 3. Northflank添加端口映射。
 
-![PixPin_2024-12-21_21-01-19.png](https://fs.noki.eu.org/f/vYVFFnuuqY32)
+![PixPin_2024-12-21_21-01-19.png](https://cdn.jsdelivr.net/gh/laboratorys/nezha-dashboard-nf@main/docs/1.png)
 
 4. 我们分别为这两个端口分配不同的域名，分别为`web.example.com`,`data.example.com`
     - `data.example.com`负责agent和面板通信，CF中关闭CDN。
