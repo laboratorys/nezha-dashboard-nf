@@ -15,6 +15,7 @@ BAK_MAX_COUNT=2
 BAK_REPO=backup-repo
 BAK_REPO_OWNER=xxx
 RUN_MODE=1
+AGENT_UUID=xxx
 ```
 
 3. Northflank添加端口映射。
@@ -31,3 +32,4 @@ RUN_MODE=1
     - 使用直连 IP **勾选**。
 6. 复制安装命令，直接在监控端VPS安装即可。
 7. （可选）`RUN_MODE=2`可对备份进行WEB管理（`/backkup2gh`），配置好后建议关闭！
+8. （可选）面板本身安装Agent请设置AGENT_UUID，在线生成：https://www.uuidgenerator.net/
