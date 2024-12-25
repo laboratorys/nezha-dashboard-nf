@@ -1,5 +1,6 @@
 #!/bin/bash
-nohup /app/backup2gh &
+export WEB_PATH=/backup2gh
+nohup /app/backup2gh > out.log &
 sleep 30
 nohup /app/dashboard &
 (
