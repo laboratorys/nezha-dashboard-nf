@@ -16,7 +16,12 @@ BAK_REPO=backup-repo
 BAK_REPO_OWNER=xxx
 RUN_MODE=1
 AGENT_UUID=xxx
+NZ_VERSION=latest
+BAK_VERSION=latest
 ```
+
+NZ_VERSION=latest #自定义哪吒版本号
+BAK_VERSION=latest #自定义备份程序版本号
 
 3. Northflank添加端口映射。
 

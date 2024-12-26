@@ -11,4 +11,6 @@ docker run -d -p 8090:8090 -p 8091:8091 \
  -e BAK_REPO="zzz" \
  -e BAK_REPO_OWNER="zzz" \
  -e BAK_GITHUB_TOKEN="zzz" \
+ -e NZ_VERSION="v1.4.4" \
+ -e BAK_VERSION="V1.3"
   --name nezha-dashboard-nf nezha-dashboard-nf
