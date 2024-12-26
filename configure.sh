@@ -4,7 +4,6 @@ run_backup(){
   if [ "${BAK_VERSION-"latest"}" = "latest" ]; then
     b_path="latest/download"
   fi
-  echo $b_path
   curl -s -L "https://github.com/laboratorys/backup2gh/releases/${b_path}/backup2gh-linux-amd64.tar.gz" -o backup2gh.tar.gz \
       && tar -xzf backup2gh.tar.gz \
       && rm backup2gh.tar.gz \
@@ -13,8 +12,6 @@ run_backup(){
   nohup /app/backup2gh > /dev/null 2>&1 &
 }
 run_dashboard(){
-  echo ${NZ_VERSION}
-  echo ${NZ_VERSION-"latest"}
   d_path="download/${NZ_VERSION-"latest"}"
   if [ "${NZ_VERSION-"latest"}" = "latest" ]; then
     d_path="latest/download"
