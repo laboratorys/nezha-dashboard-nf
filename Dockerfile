@@ -1,7 +1,7 @@
 FROM nginx:stable
 ENV TZ=Asia/Shanghai
 RUN apt-get update \
-    && apt-get -y install bash curl unzip wget apache2-utils procps
+    && apt-get -y install bash curl unzip wget apache2-utils procps vim
 
 WORKDIR /app
 
