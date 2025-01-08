@@ -25,13 +25,13 @@ run_dashboard(){
   nohup  env NZ_DEBUG=true /app/dashboard &
 }
 run_agent(){
-  if [ -n "$NZ_UUID" ]; then
+  if [[ -n "$NZ_UUID" || -n "${NZ_SERVER}" ]]; then
       (
           sleep 60
           ak=$(cat /app/data/config.yaml | grep "agentsecretkey" | awk '{print $2}')
           curl -s  -L https://raw.githubusercontent.com/nezhahq/scripts/main/agent/install.sh -o agent.sh \
           && chmod +x agent.sh \
-          && env NZ_DEBUG=true NZ_SERVER=localhost:8091 NZ_TLS=false NZ_UUID=$NZ_UUID NZ_CLIENT_SECRET=$ak ./agent.sh
+          && env NZ_DEBUG=false NZ_TLS=true NZ_UUID=$NZ_UUID NZ_CLIENT_SECRET=$ak ./agent.sh
       ) &
   fi
 }
