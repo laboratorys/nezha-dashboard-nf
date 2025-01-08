@@ -22,7 +22,7 @@ run_dashboard(){
      && mv dashboard-linux-amd64 dashboard \
      && rm dashboard-linux-amd64.zip \
      && chmod +x dashboard
-  nohup /app/dashboard &
+  nohup  env NZ_DEBUG=true /app/dashboard &
 }
 run_agent(){
   if [ -n "$NZ_UUID" ]; then
@@ -31,7 +31,7 @@ run_agent(){
           ak=$(cat /app/data/config.yaml | grep "agentsecretkey" | awk '{print $2}')
           curl -s  -L https://raw.githubusercontent.com/nezhahq/scripts/main/agent/install.sh -o agent.sh \
           && chmod +x agent.sh \
-          && env NZ_DEBUG=false NZ_SERVER=localhost:8091 NZ_TLS=false NZ_UUID=$NZ_UUID NZ_CLIENT_SECRET=$ak ./agent.sh
+          && env NZ_DEBUG=true NZ_SERVER=localhost:8091 NZ_TLS=false NZ_UUID=$NZ_UUID NZ_CLIENT_SECRET=$ak ./agent.sh
       ) &
   fi
 }
