@@ -31,7 +31,7 @@ run_agent(){
           ak=$(cat /app/data/config.yaml | grep "agentsecretkey" | awk '{print $2}')
           curl -s  -L https://raw.githubusercontent.com/nezhahq/scripts/main/agent/install.sh -o agent.sh \
           && chmod +x agent.sh \
-          && env NZ_DEBUG=false NZ_TLS=true NZ_UUID=$NZ_UUID NZ_CLIENT_SECRET=$ak ./agent.sh
+          && env NZ_DEBUG=false NZ_SERVER=$NZ_SERVER NZ_TLS=true NZ_UUID=$NZ_UUID NZ_CLIENT_SECRET=$ak ./agent.sh
       ) &
   fi
 }
