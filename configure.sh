@@ -35,8 +35,13 @@ run_agent(){
       ) &
   fi
 }
-run_backup
-sleep 30
-run_dashboard
-run_agent
-nginx -g 'daemon off;'
+# Check for command-line argument
+if [ "$1" = "--backup-only" ]; then
+  run_backup
+else
+  run_backup
+  sleep 30
+  run_dashboard
+  run_agent
+  nginx -g 'daemon off;'
+fi
