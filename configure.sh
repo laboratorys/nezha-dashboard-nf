@@ -28,7 +28,7 @@ run_agent(){
   if [[ -n "$NZ_UUID" || -n "${NZ_SERVER}" ]]; then
       (
           sleep 60
-          ak=$(cat /app/data/config.yaml | grep "agentsecretkey" | awk '{print $2}')
+          ak=$(cat /app/data/config.yaml | grep "agent_secret_key" | awk '{print $2}')
           curl -s  -L https://raw.githubusercontent.com/nezhahq/scripts/main/agent/install.sh -o agent.sh \
           && chmod +x agent.sh \
           && env NZ_DEBUG=false NZ_SERVER=$NZ_SERVER NZ_TLS=true NZ_UUID=$NZ_UUID NZ_CLIENT_SECRET=$ak ./agent.sh
@@ -36,12 +36,31 @@ run_agent(){
   fi
 }
 # Check for command-line argument
-if [ "$1" = "--backup-only" ]; then
-  run_backup
-else
-  run_backup
-  sleep 30
-  run_dashboard
-  run_agent
-  nginx -g 'daemon off;'
-fi
+case "$1" in
+  --backup-only)
+    run_backup
+    ;;
+  --dashboard-only)
+    run_dashboard
+    ;;
+  --agent-only)
+    run_agent
+    ;;
+  --nginx-only)
+    nginx -g 'daemon off;'
+    ;;
+  --all)
+    run_backup
+    sleep 30
+    run_dashboard
+    run_agent
+    nginx -g 'daemon off;'
+    ;;
+  *)
+    run_backup
+    sleep 30
+    run_dashboard
+    run_agent
+    nginx -g 'daemon off;'
+    ;;
+esac
