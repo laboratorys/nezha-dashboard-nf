@@ -1,4 +1,4 @@
-FROM nginx:stable
+FROM ghcr.io/nginxinc/nginx-unprivileged:stable
 ENV TZ=Asia/Shanghai
 
 RUN sed -i 's/deb.debian.org/mirrors.aliyun.com/g' /etc/apt/sources.list \
