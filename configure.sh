@@ -45,7 +45,7 @@ run_agent(){
 
 start_cron_service(){
   echo "正在启动 Linux Cron 守护进程..."
-  service cron start
+  crond -b
 }
 
 case "$1" in
