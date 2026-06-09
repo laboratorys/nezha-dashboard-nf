@@ -1,4 +1,7 @@
 #!/bin/bash
+
+declare -p | grep -Ev 'BASHOPTS|BASH_VERSINFO|EUID|PPID|SHELLOPTS|UID' > /etc/environment
+
 run_backup(){
   if [[ -n "$BAK_APP_NAME" || -n "${BAK_APP_NAME}" ]]; then
       b_path="download/${BAK_VERSION-"latest"}"
@@ -12,8 +15,8 @@ run_backup(){
        export WEB_PATH=/backup2gh
        nohup /app/backup2gh > /dev/null 2>&1 &
   fi
-
 }
+
 run_dashboard(){
   d_path="download/${NZ_VERSION-"latest"}"
   if [ "${NZ_VERSION-"latest"}" = "latest" ]; then
@@ -27,6 +30,7 @@ run_dashboard(){
      && chmod +x dashboard
   nohup  env NZ_DEBUG=true /app/dashboard &
 }
+
 run_agent(){
   if [[ -n "$NZ_UUID" || -n "${NZ_SERVER}" ]]; then
       (
@@ -38,7 +42,12 @@ run_agent(){
       ) &
   fi
 }
-# Check for command-line argument
+
+start_cron_service(){
+  echo "正在启动 Linux Cron 守护进程..."
+  service cron start
+}
+
 case "$1" in
   --backup-only)
     run_backup
@@ -57,6 +66,7 @@ case "$1" in
     sleep 30
     run_dashboard
     run_agent
+    start_cron_service
     nginx -g 'daemon off;'
     ;;
   *)
@@ -64,6 +74,7 @@ case "$1" in
     sleep 30
     run_dashboard
     run_agent
+    start_cron_service
     nginx -g 'daemon off;'
     ;;
 esac
